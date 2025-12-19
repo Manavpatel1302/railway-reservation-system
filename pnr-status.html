@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Check your PNR status and train booking details">
+  <title>PNR Status - RailBook</title>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages/pnr-status.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚄</text></svg>">
+</head>
+<body>
+
+  <!-- ========================================
+       HEADER / NAVIGATION
+       ======================================== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        
+        <!-- Logo -->
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon">🚄</div>
+          <span>RailBook</span>
+        </a>
+        
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search-results.html">Search Trains</a></li>
+            <li><a href="pnr-status.html">PNR Status</a></li>
+            <li><a href="booking-history.html">My Bookings</a></li>
+            <li><a href="help.html">Help</a></li>
+          </ul>
+        </nav>
+        
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+            <span class="icon">🌙</span>
+          </button>
+          <a href="login.html" class="btn btn-primary btn-sm">Login / Signup</a>
+          <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        </div>
+        
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main class="main-content">
+    
+    <!-- Hero Section -->
+    <section class="pnr-hero-section">
+      <div class="container-narrow">
+        
+        <div class="pnr-hero-content">
+          <div class="hero-icon">🔍</div>
+          <h1>Check PNR Status</h1>
+          <p>Get real-time updates on your train booking and journey details</p>
+        </div>
+        
+        <!-- PNR Search Form -->
+        <div class="pnr-search-card card-elevated">
+          <form id="pnr-form" class="pnr-form">
+            <div class="pnr-input-group">
+              <label class="form-label">Enter 10-digit PNR Number</label>
+              <div class="input-group">
+                <span class="input-icon">🎫</span>
+                <input 
+                  type="text" 
+                  id="pnr-input" 
+                  class="form-input pnr-input" 
+                  placeholder="e.g., 2345678901"
+                  pattern="[0-9]{10}"
+                  maxlength="10"
+                  required
+                  autofocus
+                >
+              </div>
+              <span class="form-error" id="pnr-error"></span>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              Check Status
+            </button>
+          </form>
+          
+          <div class="quick-pnr-info">
+            <h4>💡 Quick Tips</h4>
+            <ul>
+              <li>PNR is a 10-digit unique number on your ticket</li>
+              <li>Check status anytime for booking confirmation</li>
+              <li>Get passenger-wise berth and coach details</li>
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- PNR Result Section -->
+    <section class="pnr-result-section hidden" id="pnr-result-section">
+      <div class="container-narrow">
+        
+        <!-- Status Header -->
+        <div class="status-header" id="status-header">
+          <!-- Populated by JS -->
+        </div>
+        
+        <!-- Journey Details -->
+        <div class="section-card">
+          <div class="section-header">
+            <h3>Journey Details</h3>
+          </div>
+          <div id="journey-details" class="journey-details">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        
+        <!-- Passenger Details -->
+        <div class="section-card">
+          <div class="section-header">
+            <h3>Passenger Details</h3>
+          </div>
+          <div class="passenger-table-container">
+            <table class="passenger-table" id="passenger-table">
+              <!-- Populated by JS -->
+            </table>
+          </div>
+        </div>
+        
+        <!-- Train Chart Status -->
+        <div class="section-card">
+          <div class="section-header">
+            <h3>Chart Preparation Status</h3>
+          </div>
+          <div class="chart-status" id="chart-status">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        
+        <!-- Actions -->
+        <div class="pnr-actions">
+          <button class="btn btn-secondary" onclick="window.print()">
+            🖨️ Print Ticket
+          </button>
+          <button class="btn btn-accent" onclick="downloadTicket()">
+            📥 Download PDF
+          </button>
+          <button class="btn btn-ghost" onclick="resetPNRSearch()">
+            🔍 Check Another PNR
+          </button>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Recent PNR Checks -->
+    <section class="recent-checks-section">
+      <div class="container-narrow">
+        <h3>Recent PNR Checks</h3>
+        <div id="recent-pnr-list" class="recent-pnr-list">
+          <p class="text-secondary">No recent PNR checks</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        
+        <div class="footer-grid">
+          
+          <div class="footer-section">
+            <h4>RailBook</h4>
+            <p>Your trusted partner for railway ticket booking across Gujarat.</p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook">📘</a>
+              <a href="#" aria-label="Twitter">🐦</a>
+              <a href="#" aria-label="Instagram">📷</a>
+              <a href="#" aria-label="LinkedIn">💼</a>
+            </div>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="search-results.html">Search Trains</a></li>
+              <li><a href="pnr-status.html">Check PNR Status</a></li>
+              <li><a href="booking-history.html">My Bookings</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Support</h4>
+            <ul class="footer-links">
+              <li><a href="help.html">Help Center</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Legal</h4>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Refund Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 RailBook. All rights reserved. Made with ❤️ for travelers.</p>
+      </div>
+      
+    </div>
+  </footer>
+
+  <!-- JavaScript Files -->
+  <script src="assets/js/mock-data.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/pages/pnr-status.js"></script>
+  
+</body>
+</html>

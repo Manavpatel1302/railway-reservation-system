@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your RailBook account">
+  <title>Sign Up - RailBook</title>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages/auth.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚄</text></svg>">
+</head>
+<body>
+
+  <!-- Auth Container -->
+  <div class="auth-container">
+    
+    <!-- Left Panel -->
+    <div class="auth-panel-left">
+      <div class="auth-branding">
+        <a href="index.html" class="auth-logo">
+          <div class="logo-icon-lg">🚄</div>
+          <span class="logo-text-lg">RailBook</span>
+        </a>
+        
+        <h1 class="auth-title">Join RailBook Today!</h1>
+        <p class="auth-subtitle">Create an account and start your journey with us</p>
+        
+        <div class="auth-features">
+          <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            <span class="feature-text">Quick Bookings</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            <span class="feature-text">Booking History</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            <span class="feature-text">Exclusive Offers</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="auth-decoration">
+        <div class="decoration-train">🚄</div>
+      </div>
+    </div>
+    
+    <!-- Right Panel -->
+    <div class="auth-panel-right">
+      <div class="auth-form-container">
+        
+        <div class="auth-header">
+          <h2>Create Your Account</h2>
+          <p>Fill in your details to get started</p>
+        </div>
+        
+        <form id="signup-form" class="auth-form">
+          
+          <!-- Full Name -->
+          <div class="form-group">
+            <label class="form-label required">Full Name</label>
+            <div class="input-group">
+              <span class="input-icon">👤</span>
+              <input 
+                type="text" 
+                id="signup-name" 
+                class="form-input" 
+                placeholder="Enter your full name"
+                pattern="[A-Za-z ]{3,50}"
+                required
+                autocomplete="name"
+              >
+            </div>
+            <span class="form-error" id="name-error"></span>
+          </div>
+          
+          <!-- Email -->
+          <div class="form-group">
+            <label class="form-label required">Email Address</label>
+            <div class="input-group">
+              <span class="input-icon">✉️</span>
+              <input 
+                type="email" 
+                id="signup-email" 
+                class="form-input" 
+                placeholder="Enter your email"
+                required
+                autocomplete="email"
+              >
+            </div>
+            <span class="form-error" id="email-error"></span>
+          </div>
+          
+          <!-- Mobile -->
+          <div class="form-group">
+            <label class="form-label required">Mobile Number</label>
+            <div class="input-group">
+              <span class="input-icon">📱</span>
+              <input 
+                type="tel" 
+                id="signup-mobile" 
+                class="form-input" 
+                placeholder="10-digit mobile number"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                required
+                autocomplete="tel"
+              >
+            </div>
+            <span class="form-error" id="mobile-error"></span>
+          </div>
+          
+          <!-- Password -->
+          <div class="form-group">
+            <label class="form-label required">Password</label>
+            <div class="input-group">
+              <span class="input-icon">🔒</span>
+              <input 
+                type="password" 
+                id="signup-password" 
+                class="form-input" 
+                placeholder="Create a strong password"
+                minlength="8"
+                required
+                autocomplete="new-password"
+              >
+              <button type="button" class="input-action" id="toggle-password">
+                <span class="show-icon">👁️</span>
+              </button>
+            </div>
+            <div class="password-strength" id="password-strength"></div>
+            <span class="form-error" id="password-error"></span>
+          </div>
+          
+          <!-- Confirm Password -->
+          <div class="form-group">
+            <label class="form-label required">Confirm Password</label>
+            <div class="input-group">
+              <span class="input-icon">🔒</span>
+              <input 
+                type="password" 
+                id="signup-confirm-password" 
+                class="form-input" 
+                placeholder="Re-enter your password"
+                required
+                autocomplete="new-password"
+              >
+            </div>
+            <span class="form-error" id="confirm-password-error"></span>
+          </div>
+          
+          <!-- Terms -->
+          <label class="form-checkbox checkbox-large">
+            <input type="checkbox" id="terms-checkbox" required>
+            <span>
+              I agree to the <a href="#" class="text-link">Terms & Conditions</a> 
+              and <a href="#" class="text-link">Privacy Policy</a>
+            </span>
+          </label>
+          
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            Create Account
+          </button>
+          
+          <!-- Divider -->
+          <div class="divider-text">
+            <span>Or sign up with</span>
+          </div>
+          
+          <!-- Social Signup -->
+          <div class="social-login">
+            <button type="button" class="btn-social">
+              <span class="social-icon">📱</span>
+              <span>Google</span>
+            </button>
+            <button type="button" class="btn-social">
+              <span class="social-icon">📘</span>
+              <span>Facebook</span>
+            </button>
+          </div>
+          
+          <!-- Login Link -->
+          <div class="auth-switch">
+            Already have an account? <a href="login.html" class="text-link">Login</a>
+          </div>
+          
+        </form>
+        
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- JavaScript Files -->
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/pages/auth.js"></script>
+  
+</body>
+</html>
