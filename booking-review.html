@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Enter passenger details and complete your booking">
+  <title>Passenger Details - RailBook</title>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages/booking-review.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚄</text></svg>">
+</head>
+<body>
+
+  <!-- ========================================
+       HEADER / NAVIGATION
+       ======================================== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        
+        <!-- Logo -->
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon">🚄</div>
+          <span>RailBook</span>
+        </a>
+        
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search-results.html">Search Trains</a></li>
+            <li><a href="pnr-status.html">PNR Status</a></li>
+            <li><a href="booking-history.html">My Bookings</a></li>
+            <li><a href="help.html">Help</a></li>
+          </ul>
+        </nav>
+        
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+            <span class="icon">🌙</span>
+          </button>
+          <a href="login.html" class="btn btn-primary btn-sm">Login / Signup</a>
+          <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        </div>
+        
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================
+       PROGRESS INDICATOR
+       ======================================== -->
+  <section class="progress-section">
+    <div class="container">
+      <div class="booking-progress">
+        <div class="progress-step completed">
+          <div class="step-circle">
+            <span class="step-number">✓</span>
+          </div>
+          <div class="step-label">Search Trains</div>
+        </div>
+        
+        <div class="progress-line completed"></div>
+        
+        <div class="progress-step completed">
+          <div class="step-circle">
+            <span class="step-number">✓</span>
+          </div>
+          <div class="step-label">Select Seats</div>
+        </div>
+        
+        <div class="progress-line active"></div>
+        
+        <div class="progress-step active">
+          <div class="step-circle">
+            <span class="step-number">3</span>
+          </div>
+          <div class="step-label">Passenger Details</div>
+        </div>
+        
+        <div class="progress-line"></div>
+        
+        <div class="progress-step">
+          <div class="step-circle">
+            <span class="step-number">4</span>
+          </div>
+          <div class="step-label">Payment</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main class="main-content">
+    
+    <section class="booking-section">
+      <div class="container">
+        <div class="booking-layout">
+          
+          <!-- LEFT: Passenger Details Form -->
+          <div class="booking-main">
+            
+            <!-- Journey Summary -->
+            <div class="section-card">
+              <div class="section-header">
+                <h2>Journey Summary</h2>
+                <button class="btn btn-ghost btn-sm" onclick="window.history.back()">✎ Edit</button>
+              </div>
+              
+              <div class="journey-summary" id="journey-summary">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+            
+            <!-- Passenger Details -->
+            <div class="section-card">
+              <div class="section-header">
+                <h2>Passenger Details</h2>
+                <p class="section-subtitle">Enter details for all passengers</p>
+              </div>
+              
+              <form id="passenger-form">
+                <div id="passenger-forms-container">
+                  <!-- Populated by JS -->
+                </div>
+                
+                <!-- Contact Details -->
+                <div class="subsection">
+                  <h3 class="subsection-title">Contact Information</h3>
+                  <p class="subsection-description">Ticket and journey updates will be sent here</p>
+                  
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label required">Mobile Number</label>
+                      <div class="input-group">
+                        <span class="input-icon">📱</span>
+                        <input 
+                          type="tel" 
+                          id="contact-mobile" 
+                          class="form-input" 
+                          placeholder="10-digit mobile number"
+                          pattern="[0-9]{10}"
+                          maxlength="10"
+                          required
+                        >
+                      </div>
+                      <span class="form-error" id="mobile-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="form-label required">Email Address</label>
+                      <div class="input-group">
+                        <span class="input-icon">✉️</span>
+                        <input 
+                          type="email" 
+                          id="contact-email" 
+                          class="form-input" 
+                          placeholder="your.email@example.com"
+                          required
+                        >
+                      </div>
+                      <span class="form-error" id="email-error"></span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- GST Details (Optional) -->
+                <div class="subsection">
+                  <div class="subsection-header-toggle">
+                    <h3 class="subsection-title">GST Details (Optional)</h3>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="gst-toggle">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                  
+                  <div id="gst-section" class="gst-section" style="display: none;">
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label class="form-label">GSTIN</label>
+                        <input 
+                          type="text" 
+                          id="gstin" 
+                          class="form-input" 
+                          placeholder="22AAAAA0000A1Z5"
+                          pattern="[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}"
+                          maxlength="15"
+                        >
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="form-label">Company Name</label>
+                        <input 
+                          type="text" 
+                          id="gst-company" 
+                          class="form-input" 
+                          placeholder="Company Name"
+                        >
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="form-label">Billing Address</label>
+                      <textarea 
+                        id="gst-address" 
+                        class="form-textarea" 
+                        rows="3" 
+                        placeholder="Enter complete billing address"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Terms & Conditions -->
+                <div class="subsection">
+                  <label class="form-checkbox checkbox-large">
+                    <input type="checkbox" id="terms-checkbox" required>
+                    <span>
+                      I have read and agree to the 
+                      <a href="#" class="text-link">Terms & Conditions</a> and 
+                      <a href="#" class="text-link">Privacy Policy</a>
+                    </span>
+                  </label>
+                  
+                  <label class="form-checkbox">
+                    <input type="checkbox" id="newsletter-checkbox">
+                    <span>Send me updates and offers via email</span>
+                  </label>
+                </div>
+                
+              </form>
+            </div>
+            
+          </div>
+          
+          <!-- RIGHT: Fare Summary & Actions -->
+          <aside class="fare-summary-sidebar">
+            
+            <!-- Fare Breakdown Card -->
+            <div class="fare-card card-elevated">
+              <h3>Fare Summary</h3>
+              
+              <div class="fare-details" id="fare-details">
+                <!-- Populated by JS -->
+              </div>
+              
+              <div class="divider"></div>
+              
+              <div class="fare-total">
+                <span>Total Amount</span>
+                <span class="fare-total-amount" id="total-fare">₹0</span>
+              </div>
+              
+              <button type="submit" form="passenger-form" class="btn btn-accent btn-lg btn-block">
+                🔒 Proceed to Payment
+              </button>
+              
+              <div class="payment-security">
+                <span class="security-icon">🔒</span>
+                <span>100% Secure Payment</span>
+              </div>
+            </div>
+            
+            <!-- Travel Tips -->
+            <div class="tips-card">
+              <h4>💡 Travel Tips</h4>
+              <ul class="tips-list">
+                <li>Carry a valid government ID proof</li>
+                <li>Arrive 20 minutes before departure</li>
+                <li>Keep your e-ticket handy</li>
+                <li>Check platform number before boarding</li>
+              </ul>
+            </div>
+            
+          </aside>
+          
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================
+       PAYMENT MODAL (Mock)
+       ======================================== -->
+  <div class="modal-overlay" id="payment-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Payment Gateway</h3>
+        <button class="modal-close" onclick="UI.hideModal('payment-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="payment-demo">
+          <div class="demo-icon">💳</div>
+          <h4>Frontend Demo Only</h4>
+          <p>Payment gateway integration will be implemented on the backend.</p>
+          <p class="text-secondary text-sm">This is a frontend demonstration. In production, you would integrate with payment providers like Razorpay, Paytm, or PayU.</p>
+          
+          <div class="demo-booking-success">
+            <div class="success-animation">
+              <div class="success-checkmark">✓</div>
+            </div>
+            <h3>Booking Simulated!</h3>
+            <p>Your PNR: <strong class="pnr-number">2345678901</strong></p>
+            <p class="text-sm">Booking confirmation sent to your email</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="UI.hideModal('payment-modal')">Close</button>
+        <button class="btn btn-primary" onclick="completeBooking()">View Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        
+        <div class="footer-grid">
+          
+          <div class="footer-section">
+            <h4>RailBook</h4>
+            <p>Your trusted partner for railway ticket booking across Gujarat.</p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook">📘</a>
+              <a href="#" aria-label="Twitter">🐦</a>
+              <a href="#" aria-label="Instagram">📷</a>
+              <a href="#" aria-label="LinkedIn">💼</a>
+            </div>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="search-results.html">Search Trains</a></li>
+              <li><a href="pnr-status.html">Check PNR Status</a></li>
+              <li><a href="booking-history.html">My Bookings</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Support</h4>
+            <ul class="footer-links">
+              <li><a href="help.html">Help Center</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Legal</h4>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Refund Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 RailBook. All rights reserved. Made with ❤️ for travelers.</p>
+      </div>
+      
+    </div>
+  </footer>
+
+  <!-- JavaScript Files -->
+  <script src="assets/js/mock-data.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/pages/booking-review.js"></script>
+  
+</body>
+</html>

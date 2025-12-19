@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Select your seats and book train tickets">
+  <title>Train Details & Seat Selection - RailBook</title>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages/train-details.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚄</text></svg>">
+</head>
+<body>
+
+  <!-- ========================================
+       HEADER / NAVIGATION
+       ======================================== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        
+        <!-- Logo -->
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon">🚄</div>
+          <span>RailBook</span>
+        </a>
+        
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search-results.html">Search Trains</a></li>
+            <li><a href="pnr-status.html">PNR Status</a></li>
+            <li><a href="booking-history.html">My Bookings</a></li>
+            <li><a href="help.html">Help</a></li>
+          </ul>
+        </nav>
+        
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+            <span class="icon">🌙</span>
+          </button>
+          <a href="login.html" class="btn btn-primary btn-sm">Login / Signup</a>
+          <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        </div>
+        
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================
+       BREADCRUMB
+       ======================================== -->
+  <section class="breadcrumb-section">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="separator">›</span>
+        <a href="search-results.html">Search Results</a>
+        <span class="separator">›</span>
+        <span class="current">Train Details</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main class="main-content">
+    
+    <!-- TRAIN INFO HEADER -->
+    <section class="train-info-section">
+      <div class="container">
+        <div class="train-info-card card-elevated">
+          
+          <div class="train-header-grid">
+            <!-- Train Details -->
+            <div class="train-details">
+              <div class="train-number-lg" id="train-number">12009</div>
+              <h1 class="train-name-lg" id="train-name">Shatabdi Express</h1>
+              <div class="train-meta">
+                <span class="meta-item">🚄 Superfast</span>
+                <span class="meta-separator">•</span>
+                <span class="meta-item" id="journey-date">Thu, 12 Dec 2025</span>
+              </div>
+              <div class="train-badges" id="train-badges">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+            
+            <!-- Route Summary -->
+            <div class="route-summary">
+              <div class="route-summary-point">
+                <div class="route-time-lg" id="departure-time">06:15</div>
+                <div class="route-station-lg" id="from-station">Ahmedabad Jn</div>
+                <div class="route-code-lg" id="from-code">ADI</div>
+              </div>
+              
+              <div class="route-journey">
+                <div class="journey-duration" id="duration">1h 15m</div>
+                <div class="journey-line">
+                  <div class="journey-progress"></div>
+                </div>
+              </div>
+              
+              <div class="route-summary-point">
+                <div class="route-time-lg" id="arrival-time">07:30</div>
+                <div class="route-station-lg" id="to-station">Vadodara Jn</div>
+                <div class="route-code-lg" id="to-code">BRC</div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- SEAT SELECTION SECTION -->
+    <section class="seat-selection-section">
+      <div class="container">
+        <div class="seat-layout">
+          
+          <!-- LEFT: Class & Coach Selection -->
+          <aside class="class-selection-sidebar">
+            
+            <div class="sidebar-header">
+              <h3>Select Class & Coach</h3>
+            </div>
+            
+            <!-- Class Selection -->
+            <div class="class-list" id="class-list">
+              <!-- Populated by JS -->
+            </div>
+            
+            <div class="divider"></div>
+            
+            <!-- Coach Selection -->
+            <div class="coach-selection" id="coach-selection" style="display: none;">
+              <h4>Select Coach</h4>
+              <div class="coach-list" id="coach-list">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <!-- Seat Legend -->
+            <div class="seat-legend">
+              <h4>Seat Legend</h4>
+              <div class="legend-items">
+                <div class="legend-item">
+                  <div class="seat-sample seat-available"></div>
+                  <span>Available</span>
+                </div>
+                <div class="legend-item">
+                  <div class="seat-sample seat-selected"></div>
+                  <span>Selected</span>
+                </div>
+                <div class="legend-item">
+                  <div class="seat-sample seat-booked"></div>
+                  <span>Booked</span>
+                </div>
+                <div class="legend-item">
+                  <div class="seat-sample seat-ladies"></div>
+                  <span>Ladies Only</span>
+                </div>
+              </div>
+            </div>
+            
+          </aside>
+          
+          <!-- CENTER: Seat Map -->
+          <div class="seat-map-container">
+            
+            <div class="seat-map-header">
+              <h3>Select Your Seats</h3>
+              <p class="seat-instruction">
+                <span id="selected-class-name">Please select a class</span>
+                <span id="coach-name" style="display: none;"></span>
+              </p>
+            </div>
+            
+            <!-- Seat Grid -->
+            <div class="seat-map-wrapper">
+              <div id="seat-map" class="seat-map">
+                <!-- Empty State -->
+                <div class="seat-map-empty">
+                  <div class="empty-icon">🎫</div>
+                  <h4>Select a Class to View Seats</h4>
+                  <p>Choose your preferred travel class from the left panel</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Seat Map Controls -->
+            <div class="seat-map-controls">
+              <button id="zoom-in" class="btn-icon-sm">🔍+</button>
+              <button id="zoom-out" class="btn-icon-sm">🔍-</button>
+              <button id="reset-view" class="btn-icon-sm">⟲</button>
+            </div>
+            
+          </div>
+          
+          <!-- RIGHT: Booking Summary -->
+          <aside class="booking-summary-sidebar">
+            
+            <div class="summary-card card-elevated">
+              <h3>Booking Summary</h3>
+              
+              <div class="summary-section">
+                <h4>Selected Seats</h4>
+                <div id="selected-seats-list" class="selected-seats-list">
+                  <p class="text-secondary text-sm">No seats selected</p>
+                </div>
+              </div>
+              
+              <div class="divider"></div>
+              
+              <div class="summary-section">
+                <h4>Fare Breakdown</h4>
+                <div class="fare-breakdown">
+                  <div class="fare-row">
+                    <span>Base Fare</span>
+                    <span id="base-fare">₹0</span>
+                  </div>
+                  <div class="fare-row">
+                    <span>Reservation Charge</span>
+                    <span id="reservation-charge">₹0</span>
+                  </div>
+                  <div class="fare-row">
+                    <span>GST (5%)</span>
+                    <span id="gst">₹0</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="divider"></div>
+              
+              <div class="summary-total">
+                <span>Total Amount</span>
+                <span class="total-amount" id="total-amount">₹0</span>
+              </div>
+              
+              <button id="continue-booking" class="btn btn-accent btn-lg" disabled>
+                Continue to Passenger Details
+              </button>
+              
+              <p class="summary-note">
+                💡 You can select up to <span id="max-seats">6</span> seats
+              </p>
+            </div>
+            
+          </aside>
+          
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        
+        <div class="footer-grid">
+          
+          <div class="footer-section">
+            <h4>RailBook</h4>
+            <p>Your trusted partner for railway ticket booking across Gujarat.</p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook">📘</a>
+              <a href="#" aria-label="Twitter">🐦</a>
+              <a href="#" aria-label="Instagram">📷</a>
+              <a href="#" aria-label="LinkedIn">💼</a>
+            </div>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="search-results.html">Search Trains</a></li>
+              <li><a href="pnr-status.html">Check PNR Status</a></li>
+              <li><a href="booking-history.html">My Bookings</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Support</h4>
+            <ul class="footer-links">
+              <li><a href="help.html">Help Center</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Legal</h4>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Refund Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 RailBook. All rights reserved. Made with ❤️ for travelers.</p>
+      </div>
+      
+    </div>
+  </footer>
+
+  <!-- JavaScript Files -->
+  <script src="assets/js/mock-data.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/pages/train-details.js"></script>
+  
+</body>
+</html>

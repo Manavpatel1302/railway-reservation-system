@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Book train tickets online across Gujarat. Fast, reliable, and secure railway reservation system.">
+  <title>RailBook - Online Railway Reservation System | Book Train Tickets</title>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages/index.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚄</text></svg>">
+</head>
+<body>
+
+  <!-- ========================================
+       HEADER / NAVIGATION
+       ======================================== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        
+        <!-- Logo -->
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon">🚄</div>
+          <span>RailBook</span>
+        </a>
+        
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search-results.html">Search Trains</a></li>
+            <li><a href="pnr-status.html">PNR Status</a></li>
+            <li><a href="booking-history.html">My Bookings</a></li>
+            <li><a href="help.html">Help</a></li>
+          </ul>
+        </nav>
+        
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+            <span class="icon">🌙</span>
+          </button>
+          <a href="login.html" class="btn btn-primary btn-sm">Login / Signup</a>
+          <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        </div>
+        
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main class="main-content">
+    
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="hero-background"></div>
+      <div class="container">
+        <div class="hero-content">
+          
+          <!-- Hero Text -->
+          <div class="hero-text" data-aos="fade-up">
+            <h1 class="hero-title">
+              Journey Begins Here
+              <span class="gradient-text">Book Your Next Adventure</span>
+            </h1>
+            <p class="hero-subtitle">
+              Fast, secure, and hassle-free train ticket booking across Gujarat. 
+              Travel with confidence, arrive with joy.
+            </p>
+            
+            <!-- Trust Indicators -->
+            <div class="trust-badges">
+              <div class="trust-badge">
+                <span class="badge-icon">⚡</span>
+                <span>Instant Booking</span>
+              </div>
+              <div class="trust-badge">
+                <span class="badge-icon">🔒</span>
+                <span>100% Secure</span>
+              </div>
+              <div class="trust-badge">
+                <span class="badge-icon">💳</span>
+                <span>Easy Refunds</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Search Card -->
+          <div class="search-card" data-aos="fade-up" data-aos-delay="200">
+            <form id="train-search-form" class="search-form">
+              
+              <!-- Route Selection -->
+              <div class="search-row">
+                <div class="form-group">
+                  <label class="form-label required">From</label>
+                  <div class="autocomplete-wrapper">
+                    <input 
+                      type="text" 
+                      id="from-station" 
+                      class="form-input" 
+                      placeholder="Enter source station"
+                      autocomplete="off"
+                      required
+                    >
+                    <div class="autocomplete-results" id="from-results"></div>
+                  </div>
+                </div>
+                
+                <div class="swap-stations">
+                  <button type="button" id="swap-btn" class="btn-icon btn-ghost" aria-label="Swap stations">
+                    ⇄
+                  </button>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label required">To</label>
+                  <div class="autocomplete-wrapper">
+                    <input 
+                      type="text" 
+                      id="to-station" 
+                      class="form-input" 
+                      placeholder="Enter destination station"
+                      autocomplete="off"
+                      required
+                    >
+                    <div class="autocomplete-results" id="to-results"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Date & Passengers -->
+              <div class="search-row search-row-compact">
+                <div class="form-group">
+                  <label class="form-label required">Journey Date</label>
+                  <input 
+                    type="date" 
+                    id="journey-date" 
+                    class="form-input" 
+                    required
+                  >
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label required">Class</label>
+                  <select id="train-class" class="form-select" required>
+                    <option value="sleeper">Sleeper (SL)</option>
+                    <option value="3a">3rd AC (3A)</option>
+                    <option value="2a">2nd AC (2A)</option>
+                    <option value="1a">1st AC (1A)</option>
+                    <option value="chair" selected>Chair Car (CC)</option>
+                    <option value="executive">Executive</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Quota</label>
+                  <select id="quota" class="form-select">
+                    <option value="general" selected>General</option>
+                    <option value="tatkal">Tatkal</option>
+                    <option value="ladies">Ladies</option>
+                    <option value="senior">Senior Citizen</option>
+                    <option value="disability">Person with Disability</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label required">Passengers</label>
+                  <input 
+                    type="number" 
+                    id="passengers" 
+                    class="form-input" 
+                    min="1" 
+                    max="6" 
+                    value="1"
+                    required
+                  >
+                </div>
+              </div>
+              
+              <!-- Quick Date Filters -->
+              <div class="quick-filters">
+                <button type="button" class="chip" data-days="0">Today</button>
+                <button type="button" class="chip" data-days="1">Tomorrow</button>
+                <button type="button" class="chip" data-days="2">Day After</button>
+                <button type="button" class="chip" data-days="7">Next Week</button>
+              </div>
+              
+              <!-- Search Button -->
+              <button type="submit" class="btn btn-accent btn-lg btn-search">
+                <span>🔍</span>
+                <span>Search Trains</span>
+              </button>
+              
+            </form>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- Decorative Elements -->
+      <div class="hero-decoration">
+        <div class="decoration-circle decoration-circle-1"></div>
+        <div class="decoration-circle decoration-circle-2"></div>
+        <div class="decoration-circle decoration-circle-3"></div>
+      </div>
+    </section>
+
+    <!-- WHY BOOK WITH US SECTION -->
+    <section class="page-section features-section">
+      <div class="container">
+        
+        <div class="section-header">
+          <h2>Why Choose RailBook?</h2>
+          <p>Experience the future of train ticket booking with our premium features</p>
+        </div>
+        
+        <div class="grid grid-cols-4 features-grid">
+          
+          <div class="feature-card card" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-icon">⚡</div>
+            <h3>Lightning Fast</h3>
+            <p>Book tickets in under 60 seconds with our optimized booking flow</p>
+          </div>
+          
+          <div class="feature-card card" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-icon">🔒</div>
+            <h3>100% Secure</h3>
+            <p>Bank-grade encryption ensures your data is always protected</p>
+          </div>
+          
+          <div class="feature-card card" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-icon">💰</div>
+            <h3>Best Prices</h3>
+            <p>Get the most competitive fares with exclusive deals and offers</p>
+          </div>
+          
+          <div class="feature-card card" data-aos="fade-up" data-aos-delay="400">
+            <div class="feature-icon">🎫</div>
+            <h3>Instant Confirmation</h3>
+            <p>Receive booking confirmation immediately via email and SMS</p>
+          </div>
+          
+          <div class="feature-card card" data-aos="fade-up" data-aos-delay="500">
+            <div class="feature-icon">📱</div>
+            <h3>Mobile Friendly</h3>
+            <p>Book on the go with our fully responsive mobile interface</p>
+          </div>
+          
+          <div class="feature-card card" data-aos="fade-up" data-aos-delay="600">
+            <div class="feature-icon">🔔</div>
+            <h3>Live Updates</h3>
+            <p>Get real-time notifications about your journey and PNR status</p>
+          </div>
+          
+          <div class="feature-card card" data-aos="fade-up" data-aos-delay="700">
+            <div class="feature-icon">💳</div>
+            <h3>Easy Refunds</h3>
+            <p>Hassle-free cancellation with automatic refund processing</p>
+          </div>
+          
+          <div class="feature-card card" data-aos="fade-up" data-aos-delay="800">
+            <div class="feature-icon">🎧</div>
+            <h3>24/7 Support</h3>
+            <p>Our customer support team is always ready to help you</p>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- POPULAR ROUTES SECTION -->
+    <section class="page-section popular-routes-section">
+      <div class="container">
+        
+        <div class="section-header">
+          <h2>Popular Routes in Gujarat</h2>
+          <p>Most traveled train routes this month</p>
+        </div>
+        
+        <div class="grid grid-cols-2 routes-grid" id="popular-routes">
+          <!-- Populated by JavaScript -->
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- CUSTOMER TESTIMONIALS -->
+    <section class="page-section testimonials-section">
+      <div class="container-narrow">
+        
+        <div class="section-header">
+          <h2>What Our Customers Say</h2>
+          <p>Join thousands of happy travelers</p>
+        </div>
+        
+        <div class="testimonials-slider" id="testimonials">
+          <!-- Populated by JavaScript -->
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="page-section cta-section">
+      <div class="container">
+        <div class="cta-card card-elevated">
+          <div class="cta-content">
+            <h2>Ready to Start Your Journey?</h2>
+            <p>Book your train tickets now and travel with peace of mind</p>
+            <div class="cta-buttons">
+              <a href="#hero-section" class="btn btn-accent btn-xl">Book Tickets Now</a>
+              <a href="help.html" class="btn btn-outline btn-xl">Learn More</a>
+            </div>
+          </div>
+          <div class="cta-decoration">
+            <div class="cta-train">🚄</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        
+        <div class="footer-grid">
+          
+          <!-- Company Info -->
+          <div class="footer-section">
+            <h4>RailBook</h4>
+            <p>Your trusted partner for railway ticket booking across Gujarat. Fast, secure, and reliable.</p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook">📘</a>
+              <a href="#" aria-label="Twitter">🐦</a>
+              <a href="#" aria-label="Instagram">📷</a>
+              <a href="#" aria-label="LinkedIn">💼</a>
+            </div>
+          </div>
+          
+          <!-- Quick Links -->
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="search-results.html">Search Trains</a></li>
+              <li><a href="pnr-status.html">Check PNR Status</a></li>
+              <li><a href="booking-history.html">My Bookings</a></li>
+            </ul>
+          </div>
+          
+          <!-- Support -->
+          <div class="footer-section">
+            <h4>Support</h4>
+            <ul class="footer-links">
+              <li><a href="help.html">Help Center</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
+          
+          <!-- Legal -->
+          <div class="footer-section">
+            <h4>Legal</h4>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Refund Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 RailBook. All rights reserved. Made with ❤️ for travelers.</p>
+      </div>
+      
+    </div>
+  </footer>
+
+  <!-- JavaScript Files -->
+  <script src="assets/js/mock-data.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/pages/index.js"></script>
+  
+</body>
+</html>
